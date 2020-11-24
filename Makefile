@@ -13,11 +13,10 @@ include $(DEVKITPRO)/libnx/switch_rules
 
 TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
-SOURCES		:=	source source/guis
+SOURCES		:=	source source/guis source/widgets 
 #DATA		:=	data
-INCLUDES	:=	include include/guis
+INCLUDES	:=	include include/guis include/widgets
 #ROMFS	:=	data
-
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------

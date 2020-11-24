@@ -18,3 +18,19 @@ enum COLOUR
 	FG_YELLOW = 0xFF00FFFF,
 	FG_WHITE = 0xFFFFFFFF,
 };
+
+struct KeyBoard
+{
+	uint32_t kDown;
+	uint32_t kHeld;
+	uint32_t kUp;
+};
+
+struct sMouseState
+{
+	bool bPressed;
+	bool bReleased;
+	bool bHeld;
+	uint32_t mouse_pos_x;
+	uint32_t mouse_pos_y;
+};
