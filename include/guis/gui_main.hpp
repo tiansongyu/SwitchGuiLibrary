@@ -9,7 +9,6 @@ public:
 
     void Update();
     void Draw();
-    
     virtual void OnKeyBoardInput(KeyBoard state)override;
     virtual void OnMouseInput(sMouseState* mouse)override;
     void add();

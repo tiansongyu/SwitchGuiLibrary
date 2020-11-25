@@ -14,10 +14,16 @@ public:
     ~GuiAbout();
 
     void Update();
-    virtual void Draw();
+    void Draw();
     virtual void OnKeyBoardInput(KeyBoard state)override;
     virtual void OnMouseInput(sMouseState* mouse)override;
+    void Add_first();
+    void Add_second();
+    void Add_third();
 
 private:
     List* list;
+    int tmp_one;
+    int tmp_two;
+    int tmp_three;
 };

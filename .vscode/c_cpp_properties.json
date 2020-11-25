@@ -5,7 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${DEVKITPRO}/**",
-                "D:/devkitPro/**",
+                "D:/devkitPro/**"
             ],
             "cStandard": "c11",
             "cppStandard": "c++17"

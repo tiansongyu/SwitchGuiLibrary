@@ -20,11 +20,9 @@ public:
     inline std::string GetText();
 
 private:
-    bool IsClip(uint32_t x, uint32_t y);
 
-    uint32_t x,y,w,h;
+
     std::string stext;
     
     std::function<void(Gui* gui)> action;
-
 };
