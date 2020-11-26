@@ -58,6 +58,65 @@ void Gui::fontExit()
     FT_Done_Face(face);
     FT_Done_FreeType(library);
 }
+
+StrSize Gui::GetTextSize(const char *str)
+{
+    ret = FT_Set_Char_Size(
+    face,	 /* handle to face object           */
+    0,		 /* char_width in 1/64th of points  */
+    24 * 64 * 1, /* char_height in 1/64th of points */
+    0,		 /* horizontal device resolution    */
+    0x60 );	 /* vertical device resolution      */
+    int32_t tmpx = 0;
+    FT_Error ret = 0;
+    FT_UInt glyph_index;
+    FT_GlyphSlot slot = face->glyph;
+
+    uint32_t line_number = 1;
+    uint32_t i;
+    uint32_t str_size = strlen(str);
+    uint32_t tmpchar;
+    int32_t final_x = -1;
+    int32_t y = face->size->metrics.height / 64 ;
+    ssize_t unitcount = 0;
+
+    for (i = 0; i < str_size;)
+    {
+        unitcount = decode_utf8(&tmpchar, (const uint8_t *)&str[i]);
+        if (unitcount <= 0)
+            break;
+        i += unitcount;
+
+        if (tmpchar == '\n')
+        {
+            line_number++;
+            if(tmpx > final_x)
+                final_x = tmpx;
+            tmpx = 0;
+            continue;
+        }
+        glyph_index = FT_Get_Char_Index(face, tmpchar);
+        //If using multiple fonts, you could check for glyph_index==0 here and attempt using the FT_Face for the other fonts with FT_Get_Char_Index.
+
+        ret = FT_Load_Glyph(
+            face,		 /* handle to face object */
+            glyph_index, /* glyph index           */
+            FT_LOAD_DEFAULT);
+
+        if (ret == 0)
+        {
+            ret = FT_Render_Glyph(face->glyph,			  /* glyph slot  */
+                                    FT_RENDER_MODE_NORMAL); /* render mode */
+        }
+        tmpx += slot->advance.x >> 6;
+    }
+    if(final_x == -1)
+        return StrSize(tmpx, y * line_number);
+    else
+        return StrSize(final_x, y * (line_number));
+}
+
+
 void Gui::Draw_text(uint32_t x ,uint32_t y ,const char *str)
 {
     ret = FT_Set_Char_Size(
@@ -138,6 +197,15 @@ void Gui::Draw_glyph(FT_Bitmap *bitmap, uint32_t x, uint32_t y)
 void Gui::DrawString(uint32_t x ,uint32_t y ,const char *str)
 {
     Draw_text(x ,y ,str);
+}
+
+
+void Gui::DrawStringAligned(uint32_t x ,uint32_t y ,uint32_t w,uint32_t h,const char *str)
+{
+    uint32_t i = x + w/2 - GetTextSize(str).w / 2 ;
+    uint32_t j = y + h/2 - GetTextSize(str).h /2 + GetTextSize(str).h ;
+
+    Draw_text(i ,j ,str);
 }
 
 void Gui::DrawRect(int32_t x, int32_t y, int32_t w, int32_t h, const int32_t rgba)

@@ -21,7 +21,7 @@ int main()
 
 	//keyboard
 	KeyBoard keystate;
-
+	
 	//mouse
 	touchPosition* touch = new touchPosition[5];
 	uint32_t touch_count = 0;
@@ -41,7 +41,7 @@ int main()
 		keystate.kDown = hidKeysDown(CONTROLLER_P1_AUTO);
 		keystate.kHeld = hidKeysHeld(CONTROLLER_P1_AUTO);
 		keystate.kUp = hidKeysUp(CONTROLLER_P1_AUTO);
-
+		
 		/*****************************************************************/
 		//touch input
 		touch_count = hidTouchCount();
@@ -77,7 +77,7 @@ int main()
 			}
 		}
 		/*****************************************************************/
-
+		
 		if (last_index != index)
 		{
 			if (curr_gui != nullptr)

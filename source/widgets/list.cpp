@@ -25,7 +25,7 @@ void List::Draw(Gui *_gui)
     {
         if (curr_index == i + 1)
             _gui->FillRect(x, y + i * y_offset, 200, 100, FG_YELLOW);
-        _gui->DrawString(x, y + i * y_offset + y_start_offset, stext[i].c_str());
+        _gui->DrawStringAligned(x, y + i * y_offset , this->GetWigth(), this->GetHeight() , stext[i].c_str());
     }
 }
 

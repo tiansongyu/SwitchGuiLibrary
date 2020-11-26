@@ -19,6 +19,13 @@ struct RGBA
 	};
 };
 
+struct StrSize
+{
+    uint32_t w;
+    uint32_t h;
+    StrSize(uint32_t _w,uint32_t _h):w(_w),h(_h){};
+};
+
 class Gui 
 {
 public:
@@ -38,6 +45,8 @@ public:
 	void DrawRect(int32_t x, int32_t y, int32_t w, int32_t h, const int32_t rgba);
     void FillRect(int32_t x, int32_t y,int32_t w,int32_t h,uint32_t rgba);
     void DrawString(uint32_t x ,uint32_t y ,const char *str);
+    void DrawStringAligned(uint32_t x ,uint32_t y ,uint32_t w, uint32_t h,const char *str);
+
     void DrawShadow(int32_t x, int32_t y,int32_t w,int32_t h);
 
 
@@ -71,6 +80,7 @@ private:
     void Draw_text(uint32_t x ,uint32_t y ,const char *str);
 	void Draw_glyph(FT_Bitmap *bitmap, uint32_t x, uint32_t y);
     inline void DrawPixel(int32_t x, int32_t y,uint32_t rgba);
+    StrSize GetTextSize(const char *str);
 
     bool fontInit();
     void fontExit();

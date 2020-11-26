@@ -20,7 +20,7 @@ void Button::Draw(Gui *_gui)
     if(IsClip(m_mouse[0].mouse_pos_x,m_mouse[0].mouse_pos_y) && m_mouse[0].bHeld)
         _gui->FillRect(x+6,y+6,w-12,h-12,FG_DARK_GREY);
 
-    _gui->DrawString(this->x, this->y + this->h, this->GetText().c_str());
+    _gui->DrawStringAligned(this->x, this->y , this->w,this->h,this->GetText().c_str());
 
     memset(m_mouse,0x0,sizeof(sMouseState));
 }

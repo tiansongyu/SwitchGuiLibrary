@@ -17,14 +17,14 @@ public:
     virtual void OnMouseInput(sMouseState* mouse)override;
 
     void SetInputAction(std::vector<std::function<void(Gui* gui)> > vec_function);
-
+    uint32_t GetWigth(){return x_wight;}
+    uint32_t GetHeight(){return y_offset;}
 private:
     std::vector<std::string> stext;
     uint32_t number ;
     uint32_t curr_index;
 
     uint32_t x_wight = 200;
-    uint32_t y_start_offset = 60;
     uint32_t y_offset = 100;
 
     std::vector<std::function<void(Gui* gui)> > vec_function;
